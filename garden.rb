@@ -53,4 +53,28 @@ class Garden
     end
   end
 
+  def center
+    row = @layout.length / 2
+    el  = @layout[row].length / 2
+
+    # Find greatest number of carrots when there are 4 center cells
+    # Find the greatest number when there are 2 center cells
+    # Or when there are an odd number of row, and elements
+    if @layout.length.even? && @layout[row].length.even?
+      possible_center = {}
+      possible_center[[row, el]]         = @layout[row][el]
+      possible_center[[row - 1, el]]     = @layout[row - 1][el]
+      possible_center[[row, el - 1]]     = @layout[row][el - 1]
+      possible_center[[row - 1, el - 1]] = @layout[row - 1][el - 1]
+
+      max = possible_center.max_by { |_k, v| v }
+      center_el = [max[0][0], max[0][1]]
+    elsif @layout.length.even? && @layout[row].length.odd?
+      center_el = @layout[row][el] > @layout[row - 1][el] ? [row, el] : [row - 1, el]
+    else
+      center_el = [row, el]
+    end
+
+    center_el
+  end
 end
