@@ -19,15 +19,17 @@ class TestGarden < Test::Unit::TestCase
                           [4, 6, 5, 4, 9, 9],
                           [3, 1, 0, 5, 8]]
 
-    garden2 = Garden.new(invalid_garden_arr)
-    assert_equal(false, garden2)
+    assert_raises 'Sorry, invalid garden layout provided.' do
+      Garden.new(invalid_garden_arr)
+    end
 
     invalid_garden_arr2 = [[5, 7, 8, 6, 3],
                            [0, 0, 5, 0, 4],
                            [4, 6, 5, 4, 9],
                            [3, 1, 0, 5, 8]]
 
-    garden3 = Garden.new(invalid_garden_arr2)
-    assert_equal(false, garden3)
+    assert_raises 'Sorry, invalid garden layout provided.' do
+      Garden.new(invalid_garden_arr)
+    end
   end
 end
