@@ -6,6 +6,8 @@ require 'test/unit'
 # garden.rb
 class TestGarden < Test::Unit::TestCase
   def test_garden_valid?
+    # A valid garden has rows that are all the same length
+    # no cells of equal value neighboring eachother
     valid_garden_arr = [[5, 7, 8, 6, 3],
                         [0, 0, 7, 0, 4],
                         [4, 6, 3, 4, 9],
@@ -13,7 +15,8 @@ class TestGarden < Test::Unit::TestCase
 
     garden = Garden.new(valid_garden_arr)
     assert_equal(valid_garden_arr, garden.layout)
-
+    
+    # Not valid because one row is longer than the rest
     invalid_garden_arr = [[5, 7, 8, 6, 3],
                           [0, 0, 5, 0, 4],
                           [4, 6, 5, 4, 9, 9],
@@ -23,13 +26,15 @@ class TestGarden < Test::Unit::TestCase
       Garden.new(invalid_garden_arr)
     end
 
+    # Not valid because the two cells at [1][2], are 
+    # equal to the cells at [2][2]
     invalid_garden_arr2 = [[5, 7, 8, 6, 3],
                            [0, 0, 5, 0, 4],
                            [4, 6, 5, 4, 9],
                            [3, 1, 0, 5, 8]]
 
     assert_raises 'Sorry, invalid garden layout provided.' do
-      Garden.new(invalid_garden_arr)
+      Garden.new(invalid_garden_arr2)
     end
   end
 

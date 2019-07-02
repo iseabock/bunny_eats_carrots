@@ -12,6 +12,8 @@ class Garden
       puts "Sorry, #{e} provided."
       exit
     end
+
+    print_garden
   end
 
   def valid?(garden)
@@ -76,5 +78,12 @@ class Garden
     end
 
     center_el
+  end
+
+  def print_garden
+    @layout.each do |row|
+      puts row.inspect
+    end
+    puts
   end
 end
