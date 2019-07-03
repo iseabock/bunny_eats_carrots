@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Bunny
-
   def initialize(garden)
     @garden = garden
     @carrots_eaten = 0
@@ -18,10 +17,9 @@ class Bunny
   def lets_eat(row, el)
     if row == false
       @garden.print_garden
-      @garden.print_cute_garden
       puts "\u{1F430}  ate #{@carrots_eaten} #{@carrots_eaten == 1 ? 'carrot' : 'carrots'}!"
     else
-      # Add the number of carrots in this patch to the total eaten 
+      # Add the number of carrots in this patch to the total eaten
       @carrots_eaten += @garden.layout[row][el]
       eat_this_patch(row, el)
 

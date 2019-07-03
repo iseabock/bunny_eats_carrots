@@ -12,7 +12,7 @@ class TestBunny < Test::Unit::TestCase
                         [4, 6, 3, 4, 9],
                         [3, 1, 0, 5, 8]]
 
-    garden = Garden.new(valid_garden_arr)
+    garden = Garden.new(valid_garden_arr, false)
     bunny = Bunny.new(garden)
 
     assert_equal(bunny.next_position(2, 2), [1, 2])
@@ -29,8 +29,9 @@ class TestBunny < Test::Unit::TestCase
                         [4, 6, 3, 4, 9],
                         [3, 1, 0, 5, 8]]
 
-    garden = Garden.new(valid_garden_arr)
+    garden = Garden.new(valid_garden_arr, false)
     bunny = Bunny.new(garden)
-    assert_equal(bunny.eat_garden, eaten_garden_arr)
+
+    assert_equal(eaten_garden_arr, bunny.eat_garden)
   end
 end

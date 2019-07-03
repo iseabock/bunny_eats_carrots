@@ -3,8 +3,9 @@
 class Garden
   attr_reader :layout
 
-  def initialize(garden)
+  def initialize(garden, cute=true)
     @layout = garden
+    @cute = cute
 
     begin
       raise 'invalid garden layout' unless valid?(garden)
@@ -14,7 +15,6 @@ class Garden
     end
 
     print_garden
-    print_cute_garden
   end
 
   def valid?(garden)
@@ -87,6 +87,7 @@ class Garden
       puts row.inspect
     end
     puts
+    print_cute_garden if @cute
     @layout
   end
 
