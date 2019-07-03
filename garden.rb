@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
+# Garden class initializes valid a garden, and finds the center
+# element with the greatest number of carrots
 class Garden
   attr_reader :layout
 
   def initialize(garden, cute=true)
     @layout = garden
+    # cute flag defaults to true for display, and false for tests
     @cute = cute
 
     begin
@@ -27,7 +30,7 @@ class Garden
       return false unless row.length == row_length
 
       row.each_with_index do |_element, element_index|
-        if element_has_equal_value_neighbors?(garden, row_index, element_index)
+        if element_has_equal_value_neighbors?(row_index, element_index)
           valid = false
           break
         end
@@ -37,8 +40,8 @@ class Garden
     valid
   end
 
-  def element_has_equal_value_neighbors?(layout, row_index, el_index)
-    el_value = layout[row_index][el_index]
+  def element_has_equal_value_neighbors?(row_index, el_index)
+    el_value = @layout[row_index][el_index]
 
     # If neighboring element is zero we don't care
     return false if el_value.zero?
@@ -46,13 +49,13 @@ class Garden
     # First confirm we are not at the border of the garden.
     # Then check that the patch N, E, W, and S of us is not
     # equal to the current patch
-    if !layout[row_index - 1].nil? && layout[row_index - 1][el_index] == el_value
+    if !@layout[row_index - 1].nil? && @layout[row_index - 1][el_index] == el_value
       true
-    elsif !layout[row_index + 1].nil? && layout[row_index + 1][el_index] == el_value
+    elsif !@layout[row_index + 1].nil? && @layout[row_index + 1][el_index] == el_value
       true
-    elsif !layout[el_index - 1].nil? && layout[row_index][el_index - 1] == el_value
+    elsif !@layout[el_index - 1].nil? && @layout[row_index][el_index - 1] == el_value
       true
-    elsif !layout[el_index - 1].nil? && layout[row_index][el_index + 1] == el_value
+    elsif !@layout[el_index - 1].nil? && @layout[row_index][el_index + 1] == el_value
       true
     else
       false

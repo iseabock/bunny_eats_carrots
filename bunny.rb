@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Bunny class initializes a bunny. When bunny.eat_garden is called
+# bunny instance starts eating from te center of the garden until
+# there are no more adjacent carrots
 class Bunny
   def initialize(garden)
     @garden = garden
@@ -11,10 +14,12 @@ class Bunny
     lets_eat(@garden.center.first, @garden.center.last)
   end
 
-  # I generally avoid recursion, but this seems like an appropiate time,
+  # I generally avoid recursion, but this seems like an appropriate time,
   # assuming our garden doesn't get too big. If it did, I'd opt for an
   # iterative solution
   def lets_eat(row, el)
+    # next_position method will return false when there are no adjacent 
+    # carrots. We then print the garden in its final state.
     if row == false
       @garden.print_garden
       puts "\u{1F430}  ate #{@carrots_eaten} #{@carrots_eaten == 1 ? 'carrot' : 'carrots'}!"
