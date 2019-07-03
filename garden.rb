@@ -14,6 +14,7 @@ class Garden
     end
 
     print_garden
+    print_cute_garden
   end
 
   def valid?(garden)
@@ -87,5 +88,15 @@ class Garden
     end
     puts
     @layout
+  end
+
+  def print_cute_garden
+    @layout.each do |row|
+      row.each do |el|
+        print el.zero? ? " \u{1F331}} " : " \u{1F955}} "
+      end
+      puts
+    end
+    puts
   end
 end
