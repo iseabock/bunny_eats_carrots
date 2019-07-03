@@ -41,7 +41,8 @@ class Garden
     return false if el_value.zero?
 
     # First confirm we are not at the border of the garden.
-    # Then check that the patch N, E, W, and S of us is not equal to the current patch
+    # Then check that the patch N, E, W, and S of us is not
+    # equal to the current patch
     if !layout[row_index - 1].nil? && layout[row_index - 1][el_index] == el_value
       true
     elsif !layout[row_index + 1].nil? && layout[row_index + 1][el_index] == el_value
@@ -85,5 +86,6 @@ class Garden
       puts row.inspect
     end
     puts
+    @layout
   end
 end
