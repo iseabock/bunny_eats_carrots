@@ -18,6 +18,7 @@ class Bunny
     if row == false
       @garden.print_garden
       puts "\u{1F430}  ate #{@carrots_eaten} #{@carrots_eaten == 1 ? 'carrot' : 'carrots'}!"
+      @garden.layout
     else
       # Add the number of carrots in this patch to the total eaten
       @carrots_eaten += @garden.layout[row][el]

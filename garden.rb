@@ -17,6 +17,8 @@ class Garden
     print_garden
   end
 
+  # valid? checks that the all rows are the same length, and that
+  # no neighboring cells are the same value.
   def valid?(garden)
     row_length = garden.first.length
     valid = true
@@ -25,7 +27,7 @@ class Garden
       return false unless row.length == row_length
 
       row.each_with_index do |_element, element_index|
-        if element_has_equal_value_neighbors(garden, row_index, element_index)
+        if element_has_equal_value_neighbors?(garden, row_index, element_index)
           valid = false
           break
         end
@@ -35,7 +37,7 @@ class Garden
     valid
   end
 
-  def element_has_equal_value_neighbors(layout, row_index, el_index)
+  def element_has_equal_value_neighbors?(layout, row_index, el_index)
     el_value = layout[row_index][el_index]
 
     # If neighboring element is zero we don't care
