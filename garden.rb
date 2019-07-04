@@ -5,7 +5,7 @@
 class Garden
   attr_reader :layout
 
-  def initialize(garden, cute=true)
+  def initialize(garden, cute = true)
     @layout = garden
     # cute flag defaults to true for display, and false for tests
     @cute = cute
@@ -96,13 +96,22 @@ class Garden
     @layout
   end
 
-  def print_cute_garden
+  def print_cute_garden(bunny = nil)
     @layout.each do |row|
       row.each do |el|
-        print el.zero? ? " \u{1F331}} " : " \u{1F955}} "
+        if bunny && row == bunny[0] && el == bunny[1]
+          print " \u{1F430} "
+        else
+          print el.zero? ? " \u{1F331}} " : " \u{1F955}} "
+        end
       end
       puts
     end
     puts
+  end
+
+  def animate_garden(row, el)
+    print_cute_garden([row, el])
+    system "clear"
   end
 end
