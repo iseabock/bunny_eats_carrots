@@ -64,8 +64,9 @@ class Garden
     puts
   end
 
-  def self.animate_garden(garden, row, el, carrots_eaten)
-    print_cute_garden(garden, [row, el])
+  def self.animate_garden(garden, row_el, carrots_eaten, carrots)
+    print_cute_garden(garden, [row_el[0], row_el[1]])
+    puts "#{carrots} \u{1F955}  in this patch!"
     puts "\u{1F430}  has eaten #{carrots_eaten} #{carrots_eaten == 1 ? 'carrot' : 'carrots'}!"
     sleep(1)
     system 'clear'

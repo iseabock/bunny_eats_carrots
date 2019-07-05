@@ -29,13 +29,14 @@ class Bunny
       @garden.layout # Returning layout for easier testing
     else
       # Add the number of carrots in this patch to the total eaten, then eat it.
-      @carrots_eaten += @garden.layout[row][el]
+      carrots_in_patch = @garden.layout[row][el]
+      @carrots_eaten += carrots_in_patch
       eat_this_patch(row, el)
 
       # Find our next patch of carrots to eat.
       next_row, next_el = next_position(row, el)
 
-      Garden.animate_garden(@garden.layout, row, el, @carrots_eaten) if @animate
+      Garden.animate_garden(@garden.layout, [row, el], @carrots_eaten, carrots_in_patch) if @animate
 
       lets_eat(next_row, next_el)
     end
