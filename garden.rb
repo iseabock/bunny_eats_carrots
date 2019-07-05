@@ -7,17 +7,9 @@ class Garden
 
   def initialize(garden)
     @layout = garden
-    @original_layout = clone_garden(garden) # Store original for final display 
-
-    begin
-      raise 'invalid garden layout' unless valid?(garden)
-    rescue StandardError => e
-      puts "Sorry, #{e} provided."
-      exit
-    end
-
-    # Clear terminal for fresh garden
-    system 'clear'
+    @original_layout = clone_garden(garden) # Store original for final display
+    valid?(garden)
+    system 'clear' # Clear terminal for fresh garden
   end
 
   def center
@@ -85,20 +77,21 @@ class Garden
   # no neighboring cells are the same value.
   def valid?(garden)
     row_length = garden.first.length
-    valid = true
 
-    layout.each_with_index do |row, row_index|
-      return false unless row.length == row_length
+    begin
+      layout.each_with_index do |row, row_index|
+        raise 'invalid garden layout' unless row.length == row_length
 
-      row.each_with_index do |_element, element_index|
-        if element_has_equal_value_neighbors?(row_index, element_index)
-          valid = false
-          break
+        row.each_with_index do |_element, element_index|
+          if element_has_equal_value_neighbors?(row_index, element_index)
+            raise 'invalid garden layout'
+          end
         end
-        break unless valid
       end
+    rescue StandardError => e
+      puts "Sorry, #{e} provided."
+      exit
     end
-    valid
   end
 
   def element_has_equal_value_neighbors?(row_index, el_index)
