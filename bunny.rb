@@ -1,36 +1,41 @@
 # frozen_string_literal: true
 
 # Bunny class initializes a bunny. When bunny.eat_garden is called
-# bunny instance starts eating from te center of the garden until
+# bunny instance starts eating from the center of the garden until
 # there are no more adjacent carrots
 class Bunny
-  def initialize(garden)
+  def initialize(garden, animate = true)
     @garden = garden
+    @animate = animate
     @carrots_eaten = 0
   end
 
-  # Start eating the garden from the center
+  # Start eating the garden from the center.
   def eat_garden
     lets_eat(@garden.center.first, @garden.center.last)
   end
 
   # I generally avoid recursion, but this seems like an appropriate time,
   # assuming our garden doesn't get too big. If it did, I'd opt for an
-  # iterative solution
+  # iterative solution.
   def lets_eat(row, el)
-    # next_position method will return false when there are no adjacent 
+    # next_position method will return false when there are no adjacent
     # carrots. We then print the garden in its final state.
     if row == false
-      @garden.print_garden
+      Garden.print_garden(@garden.original_layout)
+      Garden.print_garden(@garden.layout)
+
       puts "\u{1F430}  ate #{@carrots_eaten} #{@carrots_eaten == 1 ? 'carrot' : 'carrots'}!"
-      @garden.layout
+      @garden.layout # Returning layout for easier testing
     else
-      # Add the number of carrots in this patch to the total eaten
+      # Add the number of carrots in this patch to the total eaten, then eat it.
       @carrots_eaten += @garden.layout[row][el]
       eat_this_patch(row, el)
 
-      # Find our next patch of carrots to eat
+      # Find our next patch of carrots to eat.
       next_row, next_el = next_position(row, el)
+
+      Garden.animate_garden(@garden.layout, row, el, @carrots_eaten) if @animate
 
       lets_eat(next_row, next_el)
     end

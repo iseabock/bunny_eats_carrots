@@ -13,7 +13,7 @@ class TestGarden < Test::Unit::TestCase
                         [4, 6, 3, 4, 9],
                         [3, 1, 0, 5, 8]]
 
-    garden = Garden.new(valid_garden_arr, false)
+    garden = Garden.new(valid_garden_arr)
     assert_equal(valid_garden_arr, garden.layout)
     
     # Not valid because one row is longer than the rest
@@ -23,7 +23,7 @@ class TestGarden < Test::Unit::TestCase
                           [3, 1, 0, 5, 8]]
 
     assert_raises 'Sorry, invalid garden layout provided.' do
-      Garden.new(invalid_garden_arr, false)
+      Garden.new(invalid_garden_arr)
     end
 
     # Not valid because the two cells at [1][2], are 
@@ -34,7 +34,7 @@ class TestGarden < Test::Unit::TestCase
                            [3, 1, 0, 5, 8]]
 
     assert_raises 'Sorry, invalid garden layout provided.' do
-      Garden.new(invalid_garden_arr2, false)
+      Garden.new(invalid_garden_arr2)
     end
   end
 
@@ -47,7 +47,7 @@ class TestGarden < Test::Unit::TestCase
                    [4, 6, 3, 4, 9],
                    [3, 1, 0, 5, 8]]
 
-    garden = Garden.new(garden_arr1, false)
+    garden = Garden.new(garden_arr1)
     assert_equal([2, 2], garden.center)
 
     # When there is an even number of rows with an odd number of 
@@ -58,7 +58,7 @@ class TestGarden < Test::Unit::TestCase
                    [4, 6, 3, 4, 9],
                    [3, 1, 0, 5, 8]]
 
-    garden = Garden.new(garden_arr2, false)
+    garden = Garden.new(garden_arr2)
     assert_equal([1, 2], garden.center)
 
     # When there is an even number of rows and even number of
@@ -71,7 +71,7 @@ class TestGarden < Test::Unit::TestCase
                    [4, 6, 3, 9],
                    [3, 1, 0, 8]]
 
-    garden = Garden.new(garden_arr3, false)
+    garden = Garden.new(garden_arr3)
     assert_equal([3, 2], garden.center)
   end
 end
