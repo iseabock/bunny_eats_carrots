@@ -15,7 +15,7 @@ class TestGarden < Test::Unit::TestCase
 
     garden = Garden.new(valid_garden_arr)
     assert_equal(valid_garden_arr, garden.layout)
-    
+
     # Not valid because one row is longer than the rest
     invalid_garden_arr = [[5, 7, 8, 6, 3],
                           [0, 0, 5, 0, 4],
@@ -26,7 +26,7 @@ class TestGarden < Test::Unit::TestCase
       Garden.new(invalid_garden_arr)
     end
 
-    # Not valid because the two cells at [1][2], are 
+    # Not valid because the two cells at [1][2], are
     # equal to the cells at [2][2]
     invalid_garden_arr2 = [[5, 7, 8, 6, 3],
                            [0, 0, 5, 0, 4],
@@ -50,9 +50,9 @@ class TestGarden < Test::Unit::TestCase
     garden = Garden.new(garden_arr1)
     assert_equal([2, 2], garden.center)
 
-    # When there is an even number of rows with an odd number of 
+    # When there is an even number of rows with an odd number of
     # elements, we have to choose the greatest value in the two
-    # "center" cells 
+    # "center" cells
     garden_arr2 = [[5, 7, 8, 6, 3],
                    [0, 0, 7, 0, 4],
                    [4, 6, 3, 4, 9],
@@ -61,17 +61,29 @@ class TestGarden < Test::Unit::TestCase
     garden = Garden.new(garden_arr2)
     assert_equal([1, 2], garden.center)
 
+    # When there is an odd number of rows with an even number of
+    # elements, we have to choose the greatest value in the two
+    # "center" cells
+    garden_arr3 = [[5, 7, 8, 3],
+                   [0, 0, 7, 4],
+                   [0, 6, 5, 0],
+                   [0, 0, 7, 0],
+                   [3, 1, 0, 8]]
+
+    garden = Garden.new(garden_arr3)
+    assert_equal([2, 1], garden.center)
+
     # When there is an even number of rows and even number of
     # elements, we have to choose the greatest value in the
     # four "center" cells
-    garden_arr3 = [[5, 7, 8, 3],
+    garden_arr4 = [[5, 7, 8, 3],
                    [0, 0, 7, 4],
                    [0, 0, 5, 0],
                    [0, 0, 7, 0],
                    [4, 6, 3, 9],
                    [3, 1, 0, 8]]
 
-    garden = Garden.new(garden_arr3)
+    garden = Garden.new(garden_arr4)
     assert_equal([3, 2], garden.center)
   end
 end

@@ -25,6 +25,8 @@ class Garden
       center_el = [max[0][0], max[0][1]]
     elsif @layout.length.even? && @layout[row].length.odd?
       center_el = @layout[row][el] > @layout[row - 1][el] ? [row, el] : [row - 1, el]
+    elsif @layout.length.odd? && @layout[row].length.even?
+      center_el = @layout[row][el] > @layout[row][el - 1] ? [row, el] : [row, el - 1]
     else
       center_el = [row, el]
     end
